@@ -6,13 +6,25 @@ import './FileZone.css';
 
 export default () => {
     const dispatch = useDispatch();
+    let fileRef;
 
     useEffect(() => {
         dispatch(initDefaultText());
     }, []);
 
+    function placeCaretAtEnd(el) {
+        el.focus();
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        range.collapse(false);
+        const sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+    }
+
     const handleChange = e => {
-        dispatch(setText(e.target.value));
+        dispatch(setText(fileRef.innerText));
+        placeCaretAtEnd(fileRef);
     };
 
     const handleClick = () => {
@@ -32,11 +44,11 @@ export default () => {
         <div id="file-zone">
             <div
                 id="file"
+                ref={(ref) => fileRef = ref}
                 contentEditable
                 onClick={handleClick}
-                onChange={handleChange}
-                dangerouslySetInnerHTML={{__html: text}}
-            />
+                onInput={handleChange}
+            >{text}</div>
         </div>
     );
 }
