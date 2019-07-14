@@ -1,0 +1,18 @@
+#control-panel {
+    background-color: #fff;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 3rem;
+    width: 600px;
+    margin: auto;
+}
+
+#format-actions {
+    width: 200px;
+}
+
+#format-actions button {
+    margin-right: 5px;
+}
